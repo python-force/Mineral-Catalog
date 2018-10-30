@@ -32,5 +32,5 @@ class Command(BaseCommand):
         with open(p, 'r') as mineral_list:
             minerals = json.load(mineral_list)
             print(minerals[0])
-            
+
         print ("You are legal now! Yay.")
