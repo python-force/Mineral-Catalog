@@ -14,12 +14,8 @@ from __future__ import absolute_import, unicode_literals
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-#ROOT_DIR = environ.Path(__file__) - 3 # (/a/b/myfile.py - 3 = /)
-#APPS_DIR = ROOT_DIR.path('minerals')
-
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APPS_DIR = 'minerals'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -126,6 +122,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "assets"),
-    '/var/www/static/',
+    os.path.join(BASE_DIR, APPS_DIR, "assets"),
 ]
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
