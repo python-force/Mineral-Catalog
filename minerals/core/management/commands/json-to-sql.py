@@ -12,14 +12,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         # uri_videos = Video.objects.all().filter(online=True)
-        #filepath = '/static/data/minerals.json'
 
         p = Path(__file__).parents[4]
         p = PurePath(p, 'config/assets/data/test.txt')
         print(p)
+
         p = ''
         p = PurePath(p, 'config/assets/data/minerals.json')
         print (p)
+
         # p = os.getcwd()
         # p = p + '/config/assets/data/test.txt'
         """
@@ -28,7 +29,7 @@ class Command(BaseCommand):
         for line in file:
             print (line)
         """
-        with open(p, 'r') as soccer:
-            players = json.load(soccer)
-            print(players[0])
+        with open(p, 'r') as mineral_list:
+            minerals = json.load(mineral_list)
+            print(minerals[0])
         print ("You are legal now! Yay.")
