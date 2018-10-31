@@ -20,7 +20,7 @@ class Command(BaseCommand):
         with open(p, 'r') as mineral_list:
             minerals = json.load(mineral_list)
             for mineral in minerals:
-                image_filename = mineral['name'] + ".jpg"
+                image_filename = "/static/data/images/" + mineral['name'] + ".jpg"
                 if 'name' in mineral:
                     name = mineral['name']
                 else:
