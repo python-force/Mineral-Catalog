@@ -37,7 +37,6 @@ class Command(BaseCommand):
                 image_filename = mineral['name'] + ".jpg"
                 if 'name' in mineral:
                     name = mineral['name']
-                    print(mineral['name'])
                 else:
                     name=None
 
@@ -128,7 +127,6 @@ class Command(BaseCommand):
 
                 if 'group' in mineral:
                     group = mineral['group']
-                    print(mineral['group'])
                 else:
                     group=None
                     
