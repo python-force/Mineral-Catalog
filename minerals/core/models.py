@@ -1,10 +1,14 @@
 from django.db import models
+from django.utils import timezone
+import pytz
+from django.utils.text import slugify
 
 class Test(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
 
 
 class Mineral(models.Model):
+    pub_date = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=500, blank=True, null=True)
     image_filename = models.CharField(max_length=500, blank=True, null=True)
     image_caption = models.CharField(max_length=500, blank=True, null=True)

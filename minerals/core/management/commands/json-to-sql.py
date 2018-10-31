@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 import json
 import os
 from pathlib import Path, PurePath
+from django.utils.text import slugify
 
 from minerals.core.models import Mineral, Test
 
@@ -21,10 +22,9 @@ class Command(BaseCommand):
             minerals = json.load(mineral_list)
             for mineral in minerals:
                 image_filename = "/static/data/images/" + mineral['name'] + ".jpg"
-                if 'name' in mineral:
-                    name = mineral['name']
-                else:
-                    name=None
+                name = mineral['name']
+                # slug = slugify(name)
+                # print(slug)
 
                 if 'image caption' in mineral:
                     image_caption = mineral['image caption']
@@ -118,25 +118,25 @@ class Command(BaseCommand):
                     
                 mineral_bulk.append(
                                     Mineral(name=name,
-                                        image_filename=image_filename,
-                                        image_caption=image_caption,
-                                        category=category,
-                                        formula=formula,
-                                        strunz_classification=strunz_classification,
-                                        color=color,
-                                        crystal_system=crystal_system,
-                                        unit_cell=unit_cell,
-                                        crystal_symmetry=crystal_symmetry,
-                                        cleavage=cleavage,
-                                        mohs_scale_hardness=mohs_scale_hardness,
-                                        luster=luster,
-                                        streak=streak,
-                                        diaphaneity=diaphaneity,
-                                        optical_properties=optical_properties,
-                                        refractive_index=refractive_index,
-                                        crystal_habit=crystal_habit,
-                                        specific_gravity=specific_gravity,
-                                        group=group)
+                                            image_filename=image_filename,
+                                            image_caption=image_caption,
+                                            category=category,
+                                            formula=formula,
+                                            strunz_classification=strunz_classification,
+                                            color=color,
+                                            crystal_system=crystal_system,
+                                            unit_cell=unit_cell,
+                                            crystal_symmetry=crystal_symmetry,
+                                            cleavage=cleavage,
+                                            mohs_scale_hardness=mohs_scale_hardness,
+                                            luster=luster,
+                                            streak=streak,
+                                            diaphaneity=diaphaneity,
+                                            optical_properties=optical_properties,
+                                            refractive_index=refractive_index,
+                                            crystal_habit=crystal_habit,
+                                            specific_gravity=specific_gravity,
+                                            group=group)
                 )
 
         print(mineral_bulk)
