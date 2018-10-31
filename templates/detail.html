@@ -3,6 +3,8 @@
 
 {% block container %}mineral__container{% endblock %}
 
+{% block home %}<a href="{% url "index" %}">Mineral List</a>{% endblock %}
+
 {% block content %}
 
     <h1 class="mineral__name">{{ mineral.name|title }}</h1>
@@ -13,31 +15,31 @@
     <div class="mineral__table-container">
     <table class="mineral__table">
         <tr>
-            <td class="mineral__category">Category</td>
+            <td class="mineral__category text-green">Category</td>
             <td>{{ mineral.category }}</td>
         </tr>
         <tr>
-            <td class="mineral__category">Formula</td>
+            <td class="mineral__category text-green">Formula</td>
             <td class="mineral__formula">{{ mineral.formula|safe }}</td>
         </tr>
         <tr>
-            <td class="mineral__category">Strunz Classification</td>
+            <td class="mineral__category text-green">Strunz Classification</td>
             <td>{{ mineral.strunz_classification }}</td>
         </tr>
         <tr>
-            <td class="mineral__category">Unit Cell</td>
+            <td class="mineral__category text-green">Unit Cell</td>
             <td>{{ mineral.unit_cell }}</td>
         </tr>
         <tr>
-            <td class="mineral__category">Color</td>
+            <td class="mineral__category text-green">Color</td>
             <td>{{ mineral.color }}</td>
         </tr>
         <tr>
-            <td class="mineral__category">Crystal Habit</td>
+            <td class="mineral__category text-green">Crystal Habit</td>
             <td>{{ mineral.crystal_habit }}</td>
         </tr>
         <tr>
-            <td class="mineral__category">Mohs Scale Hardness</td>
+            <td class="mineral__category text-green">Mohs Scale Hardness</td>
             <td>{{ mineral.mohs_scale_hardness }}</td>
         </tr>
         {% if mineral.crystal_system %}

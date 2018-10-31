@@ -1,0 +1,22 @@
+body {
+    background: white;
+}
+
+.mineral__image-bg {
+    background-color: white;
+    padding: 20px 0;
+}
+
+.mineral__image {
+    display: unset;
+    text-align: left;
+    border: solid 2px #CAE5D2;
+}
+
+.text-green {
+    color: #22ca54;
+}
+
+.mineral__caption {
+    background: yellow;
+}

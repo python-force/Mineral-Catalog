@@ -123,5 +123,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(os.path.dirname(BASE_DIR), "assets"),
 ]
-
-print(BASE_DIR)
