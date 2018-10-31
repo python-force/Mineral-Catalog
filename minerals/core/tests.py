@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from django.utils import timezone
 
@@ -29,7 +29,7 @@ class MineralModelTests(TestCase):
             group = "Sulfides",
         )
         now = timezone.now()
-        self.assertLess(mineral.created_at, now)
+        self.assertLess(mineral.pub_date, now)
 
 
 class MineralViewsTests(TestCase):
@@ -80,13 +80,13 @@ class MineralViewsTests(TestCase):
         )
 
     def test_index(self):
-        resp = self.client.get(reverse('courses:list'))
+        resp = self.client.get(reverse('index'))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.mineral, resp.context['minerals'])
         self.assertIn(self.mineral2, resp.context['minerals'])
 
     def test_course_detail_view(self):
-        resp = self.client.get(reverse('courses:detail',
+        resp = self.client.get(reverse('detail',
                                        kwargs={'pk': self.mineral.pk}))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.mineral, resp.context['mineral'])
