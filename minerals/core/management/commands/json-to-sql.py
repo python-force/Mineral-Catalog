@@ -11,20 +11,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        # uri_videos = Video.objects.all().filter(online=True)
-
-        p = ''
-        p = PurePath(p, 'assets/data/minerals.json')
-        print (p)
-
-        # p = os.getcwd()
-        # p = p + '/config/assets/data/test.txt'
-        """
-        filename = p
-        file = open(filename, "r")
-        for line in file:
-            print (line)
-        """
         p = Path(__file__).parents[4]
         p = PurePath(p, 'assets/data/minerals.json')
         print(p)
@@ -155,9 +141,27 @@ class Command(BaseCommand):
 
         print(mineral_bulk)
 
-        BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-        print(BASE_DIR)
-
         Mineral.objects.bulk_create(mineral_bulk)
 
         print ("You are legal now! Yay.")
+
+        """Notes"""
+
+        """
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+        print(BASE_DIR)
+
+        # uri_videos = Video.objects.all().filter(online=True)
+
+        p = ''
+        p = PurePath(p, 'assets/data/minerals.json')
+        print(p)
+
+        # p = os.getcwd()
+        # p = p + '/config/assets/data/test.txt'
+        
+        filename = p
+        file = open(filename, "r")
+        for line in file:
+            print (line)
+        """
