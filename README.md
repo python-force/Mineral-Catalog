@@ -34,3 +34,6 @@ python manage.py migrate
 ### JSON to SQL (Data)
 python manage.py json-to-sql
 
+### TESTS
+python manage.py test minerals.core.tests
+
