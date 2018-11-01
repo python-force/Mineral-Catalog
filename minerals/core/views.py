@@ -3,11 +3,17 @@ from .models import Mineral
 
 
 def index(request):
+    """Load all minerals"""
     minerals = Mineral.objects.all()
     return render(request, 'index.html', {'minerals':minerals})
 
 
 def detail(request, pk):
+    """
+    Get 1 mineral based on primary key
+    Create a dictionary for fields (verbose names)
+    and fields values.
+    """
     mineral = get_object_or_404(Mineral, pk=pk)
     field_names = []
     for field in mineral._meta.fields:
