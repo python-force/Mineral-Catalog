@@ -1,5 +1,19 @@
 body {
     background: white;
+    /* The image used */
+    background-image: url("/static/data/custom/minerals.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-white {
+    background: white;
 }
 
 .mineral__image-bg {
