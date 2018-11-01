@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
-from django.shortcuts import reverse
 # import pytz
 # from django.utils.text import slugify
 
+
 class Test(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
+
 
 class Mineral(models.Model):
     """Mineral Model"""

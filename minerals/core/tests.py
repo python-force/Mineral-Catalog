@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from .models import Mineral
 
+
 class MineralModelTests(TestCase):
     """Test for Mineral Model"""
     def test_mineral_creation(self):

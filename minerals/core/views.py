@@ -6,6 +6,7 @@ def index(request):
     minerals = Mineral.objects.all()
     return render(request, 'index.html', {'minerals':minerals})
 
+
 def detail(request, pk):
     mineral = get_object_or_404(Mineral, pk=pk)
     field_names = []
