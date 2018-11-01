@@ -20,7 +20,7 @@ from django.conf import settings
 from minerals.core import views
 
 urlpatterns = [
-    path('<int:pk>', views.detail, name="detail"),
+    path('minerals/<int:pk>', views.detail, name="detail"),
     path('', views.index, name="index"),
     path('admin/', admin.site.urls),
 ]

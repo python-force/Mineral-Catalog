@@ -11,6 +11,7 @@ class Command(BaseCommand):
     help = 'Json to SQLite'
 
     def handle(self, *args, **options):
+        """JSON file to SQLite"""
 
         p = Path(__file__).parents[4]
         p = PurePath(p, 'assets/data/minerals.json')
@@ -143,7 +144,7 @@ class Command(BaseCommand):
 
         Mineral.objects.bulk_create(mineral_bulk)
 
-        print ("You are legal now! Yay.")
+        print ("SQL records created. Yay.")
 
         """Notes"""
 

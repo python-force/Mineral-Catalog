@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils import timezone
-import pytz
-from django.utils.text import slugify
+from django.shortcuts import reverse
+# import pytz
+# from django.utils.text import slugify
 
 class Test(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
 
-
 class Mineral(models.Model):
+    """Mineral Model"""
     pub_date = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=500, blank=True, null=True)
     image_filename = models.CharField(max_length=500, blank=True, null=True)
@@ -29,3 +30,9 @@ class Mineral(models.Model):
     crystal_habit = models.CharField(max_length=500, blank=True, null=True)
     specific_gravity = models.CharField(max_length=500, blank=True, null=True)
     group = models.CharField(max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('detail', args=[self.pk])

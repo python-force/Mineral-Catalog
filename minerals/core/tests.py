@@ -5,7 +5,9 @@ from django.utils import timezone
 from .models import Mineral
 
 class MineralModelTests(TestCase):
+    """Test for Mineral Model"""
     def test_mineral_creation(self):
+        """Test to create 1 mineral"""
         mineral = Mineral.objects.create(
             name="Greigite",
             image_filename="greigite.jpg",
@@ -33,7 +35,9 @@ class MineralModelTests(TestCase):
 
 
 class MineralViewsTests(TestCase):
+    """Testing Mineral View"""
     def setUp(self):
+        """Creating 2 Minerals"""
         self.mineral = Mineral.objects.create(
             name="Greigite",
             image_filename="greigite.jpg",
@@ -80,12 +84,14 @@ class MineralViewsTests(TestCase):
         )
 
     def test_index(self):
+        """Testing Mineral List View"""
         resp = self.client.get(reverse('index'))
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.mineral, resp.context['minerals'])
         self.assertIn(self.mineral2, resp.context['minerals'])
 
     def test_course_detail_view(self):
+        """Testing Mineral Detail View"""
         resp = self.client.get(reverse('detail',
                                        kwargs={'pk': self.mineral.pk}))
         self.assertEqual(resp.status_code, 200)
