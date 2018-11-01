@@ -89,6 +89,7 @@ class MineralViewsTests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIn(self.mineral, resp.context['minerals'])
         self.assertIn(self.mineral2, resp.context['minerals'])
+        self.assertTemplateUsed(resp, 'index.html')
 
     def test_course_detail_view(self):
         """Testing Mineral Detail View"""
@@ -96,3 +97,4 @@ class MineralViewsTests(TestCase):
                                        kwargs={'pk': self.mineral.pk}))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.mineral, resp.context['mineral'])
+        self.assertTemplateUsed(resp, 'detail.html')
