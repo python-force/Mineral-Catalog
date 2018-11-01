@@ -21,6 +21,7 @@ from minerals.core import views
 
 urlpatterns = [
     path('minerals/<int:pk>', views.detail, name="detail"),
+    path('minerals/', views.index, name="index"),
     path('', views.index, name="index"),
     path('admin/', admin.site.urls),
 ]
