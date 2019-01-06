@@ -1,11 +1,20 @@
-from django.shortcuts import render, get_object_or_404
+import string
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import Mineral
 
+
+def search(request):
+    """Load all minerals"""
+    term = request.GET.get('q')
+    minerals = get_list_or_404(Mineral, name__istartswith=term)
+    alphabet = list(string.ascii_lowercase)
+    return render(request, 'search.html', {'minerals':minerals, 'alphabet':alphabet, 'term':term})
 
 def index(request):
     """Load all minerals"""
     minerals = Mineral.objects.all()
-    return render(request, 'index.html', {'minerals':minerals})
+    alphabet = list(string.ascii_lowercase)
+    return render(request, 'index.html', {'minerals':minerals, 'alphabet':alphabet})
 
 
 def detail(request, pk):

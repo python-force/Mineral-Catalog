@@ -7,7 +7,11 @@
 <section>
     <div class="grid-100 {% block container %}mineral__container{% endblock %}">
         {% for character in alphabet %}
-        <a href="{% url "search" %}?q={{ character}}">{{ character|upper }}</a>
+        {% if character.lower == term %}
+        <a href="{% url "search" %}?q={{ character }}" style="font-weight: bold; background: yellow;">{{ character|upper }}</a>
+        {% else %}
+        <a href="{% url "search" %}?q={{ character }}">{{ character|upper }}</a>
+        {% endif %}
         {% endfor %}
     </div>
 </section>
