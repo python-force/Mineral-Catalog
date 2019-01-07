@@ -1,14 +1,48 @@
 import string
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import Mineral
+from django.db.models import Q
 
 
 def search(request):
     """Load all minerals"""
     term = request.GET.get('q')
-    minerals = get_list_or_404(Mineral, name__istartswith=term)
+    text = request.GET.get('text')
+    group = request.GET.get('group')
+    if term:
+        minerals = get_list_or_404(Mineral, name__istartswith=term)
+    elif group:
+        group = group.lower().title()
+        minerals = get_list_or_404(Mineral, group=group)
+        # minerals = Mineral.objects.filter(group=group).values('group')
+    else:
+        text = text.lower().title()
+        # minerals = get_list_or_404(Mineral, name=text)
+        minerals = Mineral.objects.filter(
+            Q(name__icontains=text) |
+            Q(image_caption__icontains=text) |
+            Q(image_filename=text) |
+            Q(category__icontains=text) |
+            Q(formula__icontains=text) |
+            Q(strunz_classification__icontains=text) |
+            Q(color__icontains=text) |
+            Q(crystal_system__icontains=text) |
+            Q(unit_cell__icontains=text) |
+            Q(crystal_symmetry__icontains=text) |
+            Q(cleavage__icontains=text) |
+            Q(mohs_scale_hardness__icontains=text) |
+            Q(luster__icontains=text) |
+            Q(streak__icontains=text) |
+            Q(diaphaneity__icontains=text) |
+            Q(optical_properties__icontains=text) |
+            Q(refractive_index__icontains=text) |
+            Q(refractive_index__icontains=text) |
+            Q(crystal_habit__icontains=text) |
+            Q(specific_gravity__icontains=text) |
+            Q(group__icontains=text)
+        )
     alphabet = list(string.ascii_lowercase)
-    return render(request, 'search.html', {'minerals':minerals, 'alphabet':alphabet, 'term':term})
+    return render(request, 'index.html', {'minerals':minerals, 'alphabet':alphabet, 'term':term})
 
 def index(request):
     """Load all minerals"""

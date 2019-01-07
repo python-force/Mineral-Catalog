@@ -12,6 +12,12 @@ def random_mineral():
     mineral = random.choice(minerals)
     return {'mineral':mineral}
 
+@register.inclusion_tag('base-group.html')
+def mineral_groups():
+    """Random Mineral"""
+    groups = Mineral.objects.values('group').distinct()
+    return {'groups':groups}
+
 @register.simple_tag
 def get_verbose_field_name(instance, field_name):
     """

@@ -1,16 +1,11 @@
-body {
-    background: white;
-    /* The image used */
-    background-image: url("/static/data/custom/minerals.jpg");
-
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+#footer {
+    margin-top: 30px;
+    height: 200px;
+    text-align:center;
+    background: black;
+    color: white;
 }
+
 
 .bg-white {
     background: white;

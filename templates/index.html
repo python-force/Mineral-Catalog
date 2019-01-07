@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
 
-<section>
-    <div class="grid-100 {% block container %}mineral__container{% endblock %}">
-        {% for character in alphabet %}
-        <a href="{% url "search" %}?q={{ character}}">{{ character|upper }}</a>
-        {% endfor %}
+
+    <div class="row">
+        <div class="col-md-12">
+            {% for mineral in minerals %}
+
+                <a href="{% url 'detail' mineral.pk %}"><img src="https://via.placeholder.com/200x200?text={{ mineral.name|title }}"></a>
+            {% if forloop.counter|divisibleby:4 %}
+        </div>
     </div>
-</section>
-
-<ul class="minerals__container">
-
-    {% for mineral in minerals %}
-    <li class="minerals__item">
-      <a class="minerals__anchor" href="{% url "detail" mineral.pk %}">{{ mineral.name|title }}</a>
-    </li>
-    {% endfor %}
-
-</ul>
+    <div class="row" style="margin-top: 5px">
+        <div class="col-md-12">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

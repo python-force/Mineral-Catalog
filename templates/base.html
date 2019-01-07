@@ -1,4 +1,5 @@
 {% load static core_tags %}
+{% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,31 +10,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="{% static "css/global.css" %}">
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
   <link rel="stylesheet" href="{% static "css/custom.css" %}">
 </head>
 <body>
-  <div class="bounds bg">
-    <div class="grid-100 {% block container %}mineral__container{% endblock %}">
-      <a href="{% url "index" %}">
-        <!--
-        <svg class="logo" viewBox="0 0 127.6 84.8" preserveAspectRation="xMinYMin meet">
-          <polygon points="42.7,84.8 49.6,79.4 40,62.5 51.2,43.5 51.2,43.5 25,0 0,55.6 "/>
-          <polygon class="logo--middle" points="52.9,79.5 52.9,79.5 84.8,80.1 59.7,35 43.3,62.4 "/>
-          <polygon points="127.6,61.4 127.6,61.4 110.3,13.5 110.3,13.5 70.3,48.1 70.3,48.1 88.3,80.5 95.3,81.4 95.3,81.4 "/>
-        </svg>
-        -->
-        <h1 class="logo__name text-centered">Precious Metals and Minerals</h1>
-      </a>
-      <p class="logo__text text-centered">They're not rocks!</p>
-      {% block home %}{% endblock %}
+    <div class="container">
+
+        <section id="searchtext">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid-100">
+                        <form action="{% url 'search' %}" method="GET">
+                            <ul>
+                                <li><input type="search" name="text"></li>
+                                <li><button type="button" class="secondary small button">Search</button></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="alphabet">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid-100">
+                        {% for character in alphabet %}
+                        {% if character.lower == term %}
+                        <a href="{% url "search" %}?q={{ character }}" style="font-weight: bold; background: yellow;">{{ character|upper }}</a>
+                        {% else %}
+                        <a href="{% url "search" %}?q={{ character }}">{{ character|upper }}</a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{% url 'index' %}">
+                        <h1 class="logo__name text-centered">Precious Metals and Minerals</h1>
+                    </a>
+                    <p class="logo__text text-centered">They're not rocks!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="content">
+            <div class="row">
+                <div class="col-md-3">
+                    {% mineral_groups %}
+                </div>
+                <div class="col-md-9">
+                    {% block home %}{% endblock %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="grid-100">
-      {% block content %}{% endblock %}
-    </div>
-  </div>
-  <div class="minerals__random">
-    {% random_mineral %}
-  </div>
+    <section id="footer">
+        {% random_mineral %}
+    </section>
 </body>
 </html>
