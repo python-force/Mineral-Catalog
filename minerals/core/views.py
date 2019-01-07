@@ -5,7 +5,7 @@ from django.db.models import Q
 
 
 def search(request):
-    """Load all minerals"""
+    """Quering Minerals based on search"""
     term = request.GET.get('q')
     text = request.GET.get('text')
     group = request.GET.get('group')
