@@ -1,0 +1,7 @@
+<ul>
+{% for category in all_categories %}
+{% if category.category %}
+<li><a href="{% url 'search' %}?category={{ category.category }}">{{ category.category }}</a></li>
+{% endif %}
+{% endfor %}
+</ul>

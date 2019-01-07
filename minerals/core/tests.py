@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Mineral
+from minerals.core.models import Mineral
 
 
 class MineralModelTests(TestCase):
@@ -92,10 +92,40 @@ class MineralViewsTests(TestCase):
         self.assertIn(self.mineral2, resp.context['minerals'])
         self.assertTemplateUsed(resp, 'index.html')
 
-    def test_course_detail_view(self):
+    def test_mineral_detail_view(self):
         """Testing Mineral Detail View"""
         resp = self.client.get(reverse('detail',
                                        kwargs={'pk': self.mineral.pk}))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.mineral, resp.context['mineral'])
         self.assertTemplateUsed(resp, 'detail.html')
+
+    def test_search_q(self):
+        """Testing Search View by Alphabet"""
+        resp = self.client.get(reverse('search'), {'q': 'G'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(self.mineral, resp.context['minerals'])
+        self.assertIn(self.mineral2, resp.context['minerals'])
+        self.assertTemplateUsed(resp, 'index.html')
+
+    def test_search_q2(self):
+        """Testing Search View by Alphabet 404"""
+        resp = self.client.get(reverse('search'), {'q': 'X'})
+        self.assertEqual(resp.status_code, 404)
+        self.assertTemplateUsed(resp, '404.html')
+
+    def test_search_group(self):
+        """Testing Search View by Group"""
+        resp = self.client.get(reverse('search'), {'group': 'Sulfides'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(self.mineral, resp.context['minerals'])
+        self.assertIn(self.mineral2, resp.context['minerals'])
+        self.assertTemplateUsed(resp, 'index.html')
+
+    def test_search_text(self):
+        """Testing Search View by Full-Text Search"""
+        resp = self.client.get(reverse('search'), {'text': 'Cubic'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(self.mineral, resp.context['minerals'])
+        self.assertIn(self.mineral2, resp.context['minerals'])
+        self.assertTemplateUsed(resp, 'index.html')

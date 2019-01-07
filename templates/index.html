@@ -5,18 +5,16 @@
 
 
     <div class="row">
-        <div class="col-md-12">
-            {% for mineral in minerals %}
-
-                <a href="{% url 'detail' mineral.pk %}"><img src="https://via.placeholder.com/200x200?text={{ mineral.name|title }}"></a>
-            {% if forloop.counter|divisibleby:4 %}
+        {% for mineral in minerals %}
+        <div class="col-md-3">
+            <a href="{% url 'detail' mineral.pk %}"><img class="image-responsive" style="width:100%;" src="{{ mineral.image_filename }}"></a>
+            <p>{{ mineral.name|title }}</p>
         </div>
+        {% if forloop.counter|divisibleby:4 %}
     </div>
     <div class="row" style="margin-top: 5px">
-        <div class="col-md-12">
-            {% endif %}
-            {% endfor %}
-        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 
 {% endblock %}

@@ -9,13 +9,17 @@ def search(request):
     term = request.GET.get('q')
     text = request.GET.get('text')
     group = request.GET.get('group')
+    category = request.GET.get('category')
     if term:
         minerals = get_list_or_404(Mineral, name__istartswith=term)
     elif group:
         group = group.lower().title()
         minerals = get_list_or_404(Mineral, group=group)
         # minerals = Mineral.objects.filter(group=group).values('group')
-    else:
+    elif category:
+        category = category.lower().title()
+        minerals = get_list_or_404(Mineral, category__icontains=category)
+    elif text:
         text = text.lower().title()
         # minerals = get_list_or_404(Mineral, name=text)
         minerals = Mineral.objects.filter(
@@ -41,14 +45,20 @@ def search(request):
             Q(specific_gravity__icontains=text) |
             Q(group__icontains=text)
         )
+    else:
+        minerals = Mineral.objects.all()
     alphabet = list(string.ascii_lowercase)
-    return render(request, 'index.html', {'minerals':minerals, 'alphabet':alphabet, 'term':term})
+    return render(request, 'index.html', {'minerals': minerals,
+                                          'alphabet': alphabet,
+                                          'term': term})
+
 
 def index(request):
     """Load all minerals"""
     minerals = Mineral.objects.all()
     alphabet = list(string.ascii_lowercase)
-    return render(request, 'index.html', {'minerals':minerals, 'alphabet':alphabet})
+    return render(request, 'index.html', {'minerals': minerals,
+                                          'alphabet': alphabet})
 
 
 def detail(request, pk):
@@ -60,7 +70,9 @@ def detail(request, pk):
     mineral = get_object_or_404(Mineral, pk=pk)
     field_names = []
     for field in mineral._meta.fields:
-        if str(field).split(".")[2] not in ("id", "pub_date", "image_filename"):
+        if str(field).split(".")[2] not in ("id",
+                                            "pub_date",
+                                            "image_filename"):
             field_names.append(field.name.replace("_", " "))
 
     field_data = [
@@ -90,4 +102,5 @@ def detail(request, pk):
     for i in range(0, len(mineral._meta.fields) - 3):
         mineral_dict[field_names[i]] = field_data[i]
 
-    return render(request, 'detail.html', {'mineral':mineral, 'mineral_dict':mineral_dict})
+    return render(request, 'detail.html', {'mineral': mineral,
+                                           'mineral_dict': mineral_dict})

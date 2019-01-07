@@ -1,7 +1,5 @@
 from django.db import models
 from django.utils import timezone
-# import pytz
-# from django.utils.text import slugify
 
 
 class Test(models.Model):
