@@ -1,0 +1,15 @@
+<section id="alphabet">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid-100">
+                {% for character in alphabet %}
+                {% if character.lower == term %}
+                <a href="{% url "search" %}?q={{ character }}" style="font-weight: bold; background: yellow;">{{ character|upper }}</a>
+                {% else %}
+                <a href="{% url "search" %}?q={{ character }}">{{ character|upper }}</a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
