@@ -1,3 +1,4 @@
+import string
 from django import template
 import random
 
@@ -11,6 +12,12 @@ def random_mineral():
     minerals = Mineral.objects.all()
     mineral = random.choice(minerals)
     return {'mineral':mineral}
+
+@register.inclusion_tag('base-alphabet.html')
+def mineral_alphabet(**kwargs):
+    """Mineral Alphabet"""
+    alphabet = list(string.ascii_lowercase)
+    return {'alphabet':alphabet, 'current_letter': kwargs['current_letter']}
 
 @register.inclusion_tag('base-group.html')
 def mineral_groups(**kwargs):

@@ -1,4 +1,3 @@
-import string
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import Mineral
 from django.db.models import Q
@@ -11,14 +10,14 @@ def search(request):
     group = request.GET.get('group')
     category = request.GET.get('category')
     if term:
-        minerals = get_list_or_404(Mineral, name__istartswith=term)
+        minerals = Mineral.objects.all().filter(name__istartswith=term)
     elif group:
         group = group.lower().title()
-        minerals = get_list_or_404(Mineral, group=group)
+        minerals = Mineral.objects.all().filter(group=group)
         # minerals = Mineral.objects.filter(group=group).values('group')
     elif category:
         category = category.lower().title()
-        minerals = get_list_or_404(Mineral, category__icontains=category)
+        minerals = Mineral.objects.all().filter(category__icontains=category)
     elif text:
         text = text.lower().title()
         # minerals = get_list_or_404(Mineral, name=text)
@@ -47,23 +46,19 @@ def search(request):
         )
     else:
         minerals = Mineral.objects.all()
-    alphabet = list(string.ascii_lowercase)
     return render(request, 'index.html', {'minerals': minerals,
-                                          'alphabet': alphabet,
                                           'term': term,
                                           'mineral': {
                                               'group':group,
                                               'category': category,
+                                              'term': term,
                                           }})
 
 
 def index(request):
     """Load all minerals"""
     minerals = Mineral.objects.all()
-    alphabet = list(string.ascii_lowercase)
-    return render(request, 'index.html', {'minerals': minerals,
-                                          'alphabet': alphabet,
-                                          })
+    return render(request, 'index.html', {'minerals': minerals})
 
 
 def detail(request, pk):

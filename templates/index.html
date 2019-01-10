@@ -5,6 +5,7 @@
 
 
     <div class="row">
+        {% if minerals %}
         {% for mineral in minerals %}
         <div class="col-md-3">
             <a href="{% url 'detail' mineral.pk %}">
@@ -16,6 +17,10 @@
     <div class="row" style="margin-top: 5px">
         {% endif %}
         {% endfor %}
+        {% else %}
+         <p>There is no mineral by that search criteria that you looking for.</p>
+        {% endif %}
+
     </div>
 
 {% endblock %}
