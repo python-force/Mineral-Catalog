@@ -13,16 +13,16 @@ def random_mineral():
     return {'mineral':mineral}
 
 @register.inclusion_tag('base-group.html')
-def mineral_groups():
+def mineral_groups(**kwargs):
     """Mineral Groups"""
     groups = Mineral.objects.values('group').distinct()
-    return {'groups':groups}
+    return {'groups':groups, 'current_group': kwargs['current_group']}
 
 @register.inclusion_tag('base-category.html')
-def mineral_category():
+def mineral_category(**kwargs):
     """Mineral Category"""
     all_categories = Mineral.objects.values('category').distinct()
-    return {'all_categories':all_categories}
+    return {'all_categories':all_categories, 'current_category': kwargs['current_category']}
 
 @register.simple_tag
 def get_verbose_field_name(instance, field_name):

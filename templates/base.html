@@ -93,9 +93,9 @@
             <div class="row">
                 <div class="col-md-3">
                     <h5>by Group</h5>
-                    {% mineral_groups %}
+                    {% mineral_groups current_group=mineral.group %}
                     <h5>by Category</h5>
-                    {% mineral_category %}
+                    {% mineral_category current_category=mineral.category %}
                 </div>
                 <div class="col-md-9">
                     {% block home %}{% endblock %}

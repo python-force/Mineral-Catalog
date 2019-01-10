@@ -50,7 +50,11 @@ def search(request):
     alphabet = list(string.ascii_lowercase)
     return render(request, 'index.html', {'minerals': minerals,
                                           'alphabet': alphabet,
-                                          'term': term})
+                                          'term': term,
+                                          'mineral': {
+                                              'group':group,
+                                              'category': category,
+                                          }})
 
 
 def index(request):
@@ -58,7 +62,8 @@ def index(request):
     minerals = Mineral.objects.all()
     alphabet = list(string.ascii_lowercase)
     return render(request, 'index.html', {'minerals': minerals,
-                                          'alphabet': alphabet})
+                                          'alphabet': alphabet,
+                                          })
 
 
 def detail(request, pk):

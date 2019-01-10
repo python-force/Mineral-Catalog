@@ -8,7 +8,7 @@
         {% for mineral in minerals %}
         <div class="col-md-3">
             <a href="{% url 'detail' mineral.pk %}">
-                <img src="https://via.placeholder.com/300x300.jpg?text={{ mineral.name }}" style="width: 100%;">
+                <img src="https://via.placeholder.com/300x300.jpg?text={{ mineral.name }}" style="width: 100%; margin-bottom: 25px;">
             </a>
         </div>
         {% if forloop.counter|divisibleby:4 %}
